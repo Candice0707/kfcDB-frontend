@@ -2,7 +2,11 @@
     // padding: 20px;
 }
 
-mat-card {
-    margin-top: 5px;
-    width: inherit;
- }
+.restaurant-card {
+    max-width: 400px;
+  }
+  
+.restaurant-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
