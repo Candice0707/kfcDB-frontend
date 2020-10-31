@@ -10,3 +10,26 @@
     background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
     background-size: cover;
 }
+
+.profile-form {
+    // min-width: 150px;
+    // max-width: 500px;
+    // widows: 300px;
+    margin-top: 30px;
+    margin-left: 300px;
+    margin-right: 300px;
+    display: list-item;
+
+  }
+  
+.full-width {
+    width: 100%;
+}
+
+td {
+    padding-right: 8px;
+}
+
+.example-chip-list {
+    width: 100%;
+  }
