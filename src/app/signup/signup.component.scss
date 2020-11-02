@@ -1,0 +1,47 @@
+html,
+body {
+    height: 100%;
+}
+
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  min-height: 100vh;
+}
+
+.greetings {
+    text-align: center;
+}
+
+.login-wrapper {
+  height: 100%;
+  background: lightyellow;
+}
+
+.sign-up-button {
+    margin-right: 20px;
+}
+
+
+.box {
+  position: relative;
+  top: 0;
+  opacity: 1;
+  float: left;
+  padding: 40px 50px 40px 50px;
+  width: 100%;
+  border-radius: 10px;
+  transform: scale(1);
+  -webkit-transform: scale(1);
+  -ms-transform: scale(1);
+  z-index: 5;
+  max-width: 330px;
+}
+
+
+input {
+    height: 30px;
+    width: -webkit-fill-available;
+    border: none;
+}
