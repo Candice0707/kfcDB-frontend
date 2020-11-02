@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 export interface Tag {
   name: string;
@@ -26,6 +28,13 @@ export class HomeComponent implements OnInit {
     {name: 'Apple'},
   ];
   userID = "hellothere";
+
+
+  // alert
+  private _success = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage = '';
+
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;
@@ -58,6 +67,15 @@ export class HomeComponent implements OnInit {
   
 
   ngOnInit(): void {
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = '');
+  }
+
+  public changeSuccessMessage() {
+    // this._success.next(`${new Date()} - Profile successfully updated.`);
+    this._success.next(`Profile successfully updated.`);
   }
 
 }

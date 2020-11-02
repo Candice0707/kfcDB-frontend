@@ -52,6 +52,10 @@
     
     <mat-tab label="Profile"> 
         <form class="profile-form">
+          <div class="notification">
+            <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+          </div>
+          
             <mat-form-field class="full-width">
               <mat-label>User ID (disabled)</mat-label>
               <input matInput disabled [(ngModel)]="userID" name="userID">
@@ -110,7 +114,7 @@
             
           </form>
           <div class="profile-action">
-            <button mat-raised-button color="primary">SAVE</button>
+            <button mat-raised-button color="primary" (click)="changeSuccessMessage()">SAVE</button>
             <button mat-button>Delete Account</button>
           </div>
           
