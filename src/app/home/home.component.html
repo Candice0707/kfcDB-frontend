@@ -54,7 +54,7 @@
         <form class="profile-form">
             <mat-form-field class="full-width">
               <mat-label>User ID (disabled)</mat-label>
-              <input matInput disabled value="iamafancyid">
+              <input matInput disabled [(ngModel)]="userID" name="userID">
             </mat-form-field>
           
             <table class="full-width" cellspacing="0"><tr>

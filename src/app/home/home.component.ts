@@ -25,6 +25,7 @@ export class HomeComponent implements OnInit {
     {name: 'Lime'},
     {name: 'Apple'},
   ];
+  userID = "hellothere";
   add(event: MatChipInputEvent): void {
     const input = event.input;
     const value = event.value;

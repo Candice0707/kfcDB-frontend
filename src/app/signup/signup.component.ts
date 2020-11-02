@@ -6,7 +6,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./signup.component.scss']
 })
 export class SignupComponent implements OnInit {
-
+  email = "candiceeee@yahoo.com"
+  password = "ok"
   constructor() { }
 
   ngOnInit(): void {
