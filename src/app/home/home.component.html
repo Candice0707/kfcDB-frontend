@@ -12,6 +12,15 @@
                     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
                     <mat-card-content>
                       <p>
+                        <ng-template #t let-fill="fill">
+                          <span class="star" [class.full]="fill === 100">
+                            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                          </span>
+                        </ng-template>
+                        
+                        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                      </p>
+                      <p>
                         matcha loveeeee
                       </p>
                     </mat-card-content>
@@ -30,6 +39,15 @@
                     </mat-card-header>
                     <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
                     <mat-card-content>
+                      <p>
+                        <ng-template #t let-fill="fill">
+                          <span class="star" [class.full]="fill === 100">
+                            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                          </span>
+                        </ng-template>
+                        
+                        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                      </p>
                       <p>
                         Taro Milk Teaaaa
                       </p>

@@ -34,3 +34,20 @@ td {
     text-align: right;
     margin-right: 300px;
 }
+
+.star {
+  position: relative;
+  display: inline-block;
+  font-size: 2rem;
+  color: #d3d3d3;
+}
+.full {
+  color: lightcoral;
+  ;
+}
+.half {
+  position: absolute;
+  display: inline-block;
+  overflow: hidden;
+  color: lightcoral;
+}

@@ -29,6 +29,7 @@ export class HomeComponent implements OnInit {
   ];
   userID = "hellothere";
 
+  currentRate = 4.0;
 
   // alert
   private _success = new Subject<string>();
