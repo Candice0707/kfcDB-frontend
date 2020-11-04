@@ -3,6 +3,9 @@ import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import {MatDialogModule} from '@angular/material/dialog';
+import { MatDialog} from '@angular/material/dialog';
+
 
 export interface Tag {
   name: string;
@@ -13,7 +16,6 @@ export interface Tag {
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss']
 })
-
 
 export class HomeComponent implements OnInit {
 
@@ -59,12 +61,10 @@ export class HomeComponent implements OnInit {
     }
   }
  
+  
 
-  constructor() { 
-    
-
+  constructor(public dialog: MatDialog) { 
   }
-
   
 
   ngOnInit(): void {
@@ -78,5 +78,18 @@ export class HomeComponent implements OnInit {
     // this._success.next(`${new Date()} - Profile successfully updated.`);
     this._success.next(`Profile successfully updated.`);
   }
+  // openDialog() {
+  //   const dialogRef = this.dialog.open(DeleteDialog);
+
+  //   dialogRef.afterClosed().subscribe(result => {
+  //     console.log(`Dialog result: ${result}`);
+  //   });    
+  // }
 
 }
+
+// @Component({
+//   selector: 'delete-dialog',
+//   templateUrl: './delete-dialog.html',
+// })
+// export class DeleteDialog {}
