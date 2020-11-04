@@ -20,6 +20,8 @@ import { MatChipsModule } from '@angular/material/chips';
 import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -49,7 +51,8 @@ import { MatDialogModule } from '@angular/material/dialog';
     MatFormFieldModule,
     MatChipsModule,
     NgbModule,
-    MatDialogModule
+    MatDialogModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

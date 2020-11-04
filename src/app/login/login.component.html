@@ -1,12 +1,9 @@
 <div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
-      <!-- <mat-card-header>
-        <h2> Log In </h2> 
-      </mat-card-header> -->
       <div class="greetings">
         <h3>Welcome! Please sign in here.</h3>
     </div>
-      <form class="sign-in-form">
+      <form class="sign-in-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <mat-card-content>
           <mat-form-field class="card">
             <input matInput name="username" [(ngModel)]="username" placeholder="Username">
@@ -20,9 +17,12 @@
         </mat-card-content>
         <br>
         <br>
-        <button class="sign-in-button" mat-raised-button color="primary" routerLink="/home-component" routerLinkActive="active">
+        <!-- <button class="sign-in-button" mat-raised-button color="primary" routerLink="/home-component" routerLinkActive="active">
             Sign In
-        </button>
+        </button> -->
+        <button class="sign-in-button" mat-raised-button color="primary">
+          Sign In
+      </button>
 
         <button class="sign-up-button" mat-raised-button color="basic"  routerLink="/sign-up-component" routerLinkActive="active">
             Sign Up
