@@ -14,7 +14,7 @@ body {
     text-align: center;
 }
 
-.login-wrapper {
+.signup-wrapper {
   height: 100%;
   background: lightyellow;
 }
@@ -30,7 +30,7 @@ body {
   opacity: 1;
   float: left;
   padding: 40px 50px 40px 50px;
-  width: 100%;
+  width: 500px;
   border-radius: 10px;
   transform: scale(1);
   -webkit-transform: scale(1);
@@ -41,7 +41,7 @@ body {
 
 
 input {
+  border: none;
     height: 30px;
-    width: -webkit-fill-available;
-    border: none;
+    width: fit-content; 
 }

@@ -1,18 +1,28 @@
-<div class="login-wrapper" fxLayout="row" fxLayoutAlign="center center">
+<div class="signup-wrapper" fxLayout="row" fxLayoutAlign="center center">
     <mat-card class="box">
       <div class="greetings">
         <h3>Please Sign up Here</h3>
     </div>
-      <form class="sign-up-form">
+      <form class="sign-up-form" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
         <mat-card-content>
+          
+
           <mat-form-field class="card">
-            <input matInput name="email" [(ngModel)]="email" placeholder="Email">
+            <input matInput name="email" formControlName="email" class="form-control"  placeholder="Email">
           </mat-form-field>
   <br>
   <br>
-
+        <mat-form-field class="card">
+          <input matInput name="firstname" formControlName="firstname" class="form-control"  placeholder="First Name">
+        </mat-form-field>
+        <mat-form-field class="card">
+          <input matInput name="lastname" formControlName="lastname" class="form-control" placeholder="Last Name">
+        </mat-form-field>
+          
+          
+        <br>
           <mat-form-field class="card">
-            <input matInput name="password" type="password" [(ngModel)]="password" placeholder="Password">
+            <input matInput name="password" formControlName="password" class="form-control"  type="password" placeholder="Password">
           </mat-form-field>
         </mat-card-content>
         <br>

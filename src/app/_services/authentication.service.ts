@@ -21,8 +21,8 @@ export class AuthenticationService {
     }
 
     login(username, password) {
-        console.log("called");
-        return this.http.post<any>(`${this.apiUrl}/users/authenticate`, { username, password })
+        console.log("try login");
+        return this.http.post<any>(`${this.apiUrl}/login`, { username, password })
             .pipe(map(user => {
                 console.log("posted");
                 console.log(user);
@@ -30,6 +30,18 @@ export class AuthenticationService {
                 localStorage.setItem('currentUser', JSON.stringify(user));
                 this.currentUserSubject.next(user);
                 console.log("return from login");
+                return user;
+            }));
+    }
+
+    signup(email, password, firstname, lastname) {
+        console.log("try signup");
+        return this.http.post<any>(`${this.apiUrl}/signup`, { email, password,firstname, lastname })
+            .pipe(map(user => {
+                console.log(user);
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                console.log("return from signup");
                 return user;
             }));
     }
