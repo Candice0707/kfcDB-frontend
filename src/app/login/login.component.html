@@ -3,7 +3,7 @@
       <div class="greetings">
         <h3>Welcome! Please sign in here.</h3>
     </div>
-      <form class="sign-in-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <form class="sign-in-form" [formGroup]="loginForm" >
         <mat-card-content>
           <mat-form-field class="card">
             <input matInput name="username" formControlName="username" class="form-control" placeholder="Username">
@@ -20,7 +20,7 @@
         <!-- <button class="sign-in-button" mat-raised-button color="primary" routerLink="/home-component" routerLinkActive="active">
             Sign In
         </button> -->
-        <button class="sign-in-button" mat-raised-button color="primary">
+        <button class="sign-in-button" mat-raised-button color="primary" (click)="onSubmit()">
           Sign In
       </button>
 

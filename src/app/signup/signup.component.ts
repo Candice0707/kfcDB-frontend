@@ -14,7 +14,7 @@ export class SignupComponent implements OnInit {
   email = "candiceeee@yahoo.com";
   password = "okkay";
   submitted = false;
-  signupForm: FormGroup;
+  signupGroup: FormGroup;
   loading = false;
   
   constructor(private formBuilder: FormBuilder,
@@ -23,15 +23,21 @@ export class SignupComponent implements OnInit {
     private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.signupGroup = this.formBuilder.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required],
+      firstname: ['', Validators.required],
+      lastname: ['', Validators.required]
+  });
   }
-  get f() { return this.signupForm.controls; }
+
+  get f() { return this.signupGroup.controls; }
 
   onSubmit() {
     this.submitted = true;
 
-
     // stop here if form is invalid
-    if (this.signupForm.invalid) {
+    if (this.signupGroup.invalid) {
         return;
     }
 
