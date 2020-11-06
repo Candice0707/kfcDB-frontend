@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../_models';
+import { Restaurant } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class RestaurantService {
@@ -20,5 +21,9 @@ export class RestaurantService {
         return this.currentUserSubject.value;
     }
 
+    searchRestaurantByCategory(searchkey) {
+        console.log("try search restaurants");
+        return this.http.post<Restaurant>(`${this.apiUrl}/search`, {searchkey});
+    }
     
 }

@@ -5,25 +5,15 @@ import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { AuthenticationService} from '../_services';
-import { UserService } from '../_services'
+import { AuthenticationService, UserService, RestaurantService} from '../_services';
 import { Router, ActivatedRoute } from '@angular/router';
-
+import { Restaurant } from '../_models';
 import { first } from 'rxjs/operators';
 
 
 
 export interface Tag {
   name: string;
-}
-
-export interface Restaurant {
-  restaurant_id: number;
-  name: string;
-  address: string;
-  phone: string;
-  category: string;
-  rating: number;
 }
 
 @Component({
@@ -45,7 +35,13 @@ export class HomeComponent implements OnInit {
     {name: 'Apple'},
   ];
   
-  
+  // restaurant list
+  restaurantList: Restaurant[] = [
+    {restaurant_id: 1, name: "teamoji", address: "123 St, Champaign, IL", phone: "234-123-5467",  category: "boba", rating: 4},
+    {restaurant_id: 2, name: "cafe bene", address: "23 St, Champaign, IL", phone: "123-355-1234",  category: "korean", rating: 3.4},
+    {restaurant_id: 3, name: "Restaurant 3", address: "1553 St, Champaign, IL", phone: "512-235-1234",  category: "pizza", rating: 2},
+    {restaurant_id: 4, name: "Restaurant 4", address: "1123 St, Champaign, IL", phone: "123-578-4214",  category: "bbq", rating: 5}
+  ];
   currentRate = 4.0;
 
 
@@ -94,10 +90,12 @@ export class HomeComponent implements OnInit {
     private authenticationService : AuthenticationService,
     private userService : UserService,
     private route: ActivatedRoute,
-    private router: Router) { 
+    private router: Router,
+    private restaurantService : RestaurantService) { 
     this.update_localStorage();
     console.log("constructor: ", this.userID);
     this.get_profile();
+    
   }
   
 
@@ -121,13 +119,16 @@ export class HomeComponent implements OnInit {
     this._fail.next(`Please fill in required fields and try again.`);
   }
 
+  get_restaurant_list() {
+    // this.restaurantService.searchRestaurantByCategory(this.searchkey).
+  }
   get_profile() {
     this.userService.get_profile(this.userID).pipe(first()).subscribe(
       data => {
         this.update_localStorage();
       },
       error => {
-        this.router.navigate(['/login-component']);
+        // this.router.navigate(['/login-component']);
       }
     );
   }

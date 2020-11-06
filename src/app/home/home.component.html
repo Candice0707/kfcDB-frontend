@@ -8,69 +8,38 @@
       </form>
      
       
- 
         <mat-grid-list class="restaurant-list" cols="3" rowHeight="4:5">
+          <mat-list-item *ngFor="let restaurant of restaurantList">
             <mat-grid-tile>
-                <mat-card class="restaurant-card">
-                    <mat-card-header>
-                      <div mat-card-avatar class="restaurant-header-image"></div>
-                      <mat-card-title>Teamoji</mat-card-title>
-                      <mat-card-subtitle>Boba</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                      <p>
-                        <ng-template #t let-fill="fill">
-                          <span class="star" [class.full]="fill === 100">
-                            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-                          </span>
-                        </ng-template>
-                        
-                        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                      </p>
-                      <p>
-                        matcha loveeeee
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                      <button mat-raised-button color="primary">RATE</button>
-                      <button mat-button>LEARN MORE</button>
-                    </mat-card-actions>
-                  </mat-card>
-            </mat-grid-tile>
-            <mat-grid-tile>
-                <mat-card class="restaurant-card">
-                    <mat-card-header>
-                      <div mat-card-avatar class="restaurant-header-image"></div>
-                      <mat-card-title>Latea</mat-card-title>
-                      <mat-card-subtitle>Boba</mat-card-subtitle>
-                    </mat-card-header>
-                    <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                    <mat-card-content>
-                      <p>
-                        <ng-template #t let-fill="fill">
-                          <span class="star" [class.full]="fill === 100">
-                            <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
-                          </span>
-                        </ng-template>
-                        
-                        <ngb-rating [(rate)]="currentRate" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
-                      </p>
-                      <p>
-                        Taro Milk Teaaaa
-                      </p>
-                    </mat-card-content>
-                    <mat-card-actions>
-                      <button mat-raised-button color="primary">RATE</button>
-                      <button mat-button>LEARN MORE</button>
-                    </mat-card-actions>
-                  </mat-card>
-
-               
-            </mat-grid-tile>
-            <mat-grid-tile>3</mat-grid-tile>
-            <mat-grid-tile>4</mat-grid-tile>
-            
+              <mat-card class="restaurant-card">
+                  <mat-card-header>
+                    <div mat-card-avatar class="restaurant-header-image"></div>
+                    <mat-card-title>{{restaurant.name}}</mat-card-title>
+                    <mat-card-subtitle>{{restaurant.category}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                  <mat-card-content>
+                    <p>
+                      <ng-template #t let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                        </span>
+                      </ng-template>
+                      
+                      <ngb-rating [(rate)]="restaurant.rating" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                    </p>
+                    <p>
+                      Address: {{restaurant.address}}, 
+                      Contanct: {{restaurant.phone}}
+                    </p>
+                  </mat-card-content>
+                  <mat-card-actions>
+                    <button mat-raised-button color="primary">RATE</button>
+                    <button mat-button>LEARN MORE</button>
+                  </mat-card-actions>
+                </mat-card>
+          </mat-grid-tile>
+         </mat-list-item>
         </mat-grid-list>
         
     </mat-tab>
