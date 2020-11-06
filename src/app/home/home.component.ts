@@ -39,8 +39,8 @@ export class HomeComponent implements OnInit {
   restaurantList: Restaurant[] = [
     {restaurant_id: 1, name: "teamoji", address: "123 St, Champaign, IL", phone: "234-123-5467",  category: "boba", rating: 4},
     {restaurant_id: 2, name: "cafe bene", address: "23 St, Champaign, IL", phone: "123-355-1234",  category: "korean", rating: 3.4},
-    {restaurant_id: 3, name: "Restaurant 3", address: "1553 St, Champaign, IL", phone: "512-235-1234",  category: "pizza", rating: 2},
-    {restaurant_id: 4, name: "Restaurant 4", address: "1123 St, Champaign, IL", phone: "123-578-4214",  category: "bbq", rating: 5}
+    {restaurant_id: 3, name: "oshis", address: "1553 St, Champaign, IL", phone: "512-235-1234",  category: "ramen", rating: 2},
+    {restaurant_id: 4, name: "saska", address: "1123 St, Champaign, IL", phone: "123-578-4214",  category: "sushi", rating: 5}
   ];
   currentRate = 4.0;
 
@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
   userID : number;
 
   //search
-  searchkey:string;
+  searchkey : string;
   
   // alert
   private _success = new Subject<string>();
@@ -95,6 +95,7 @@ export class HomeComponent implements OnInit {
     this.update_localStorage();
     console.log("constructor: ", this.userID);
     this.get_profile();
+    this.get_restaurant_list();
     
   }
   
@@ -120,7 +121,14 @@ export class HomeComponent implements OnInit {
   }
 
   get_restaurant_list() {
-    // this.restaurantService.searchRestaurantByCategory(this.searchkey).
+    this.restaurantService.searchRestaurantByCategory(this.searchkey).pipe().subscribe(
+      data => {
+        this.restaurantList = data;
+      },
+      error => {
+        this._fail.next(`Failed to fetch data. Please try again.`);
+      }
+    )
   }
   get_profile() {
     this.userService.get_profile(this.userID).pipe(first()).subscribe(

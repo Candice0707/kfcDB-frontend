@@ -3,7 +3,7 @@
       <form class="search-form">
         <mat-form-field class="full-width">
           <mat-label>Search</mat-label>
-          <input matInput placeholder="Ex. Pizza" name="searchkey" [(ngModel)]="searchkey" >
+          <input matInput placeholder="Ex. Pizza" name="searchkey" [(ngModel)]="searchkey" (blur)="get_restaurant_list()" >
         </mat-form-field>
       </form>
      
@@ -30,7 +30,8 @@
                     </p>
                     <p>
                       Address: {{restaurant.address}}, 
-                      Contanct: {{restaurant.phone}}
+                      <br>
+                       {{restaurant.phone}}
                     </p>
                   </mat-card-content>
                   <mat-card-actions>

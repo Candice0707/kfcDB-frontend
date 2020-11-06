@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, catchError, tap } from 'rxjs/operators';
+
 
 import { User } from '../_models';
 import { Restaurant } from '../_models';
@@ -22,8 +23,7 @@ export class RestaurantService {
     }
 
     searchRestaurantByCategory(searchkey) {
-        console.log("try search restaurants");
-        return this.http.post<Restaurant>(`${this.apiUrl}/search`, {searchkey});
+        console.log("try get restaurants");
+        return this.http.post<Restaurant[]>(`${this.apiUrl}/search`, {searchkey});
     }
-    
 }
