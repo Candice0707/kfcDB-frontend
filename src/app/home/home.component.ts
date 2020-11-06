@@ -57,9 +57,12 @@ export class HomeComponent implements OnInit {
   // alert
   private _success = new Subject<string>();
   private _fail = new Subject<string>();
+  private _searchFail = new Subject<string>();
   staticAlertClosed = false;
   successMessage = '';
   failMessage = '';
+  searchfailMessage = '';
+
 
   add(event: MatChipInputEvent): void {
     const input = event.input;
@@ -110,6 +113,11 @@ export class HomeComponent implements OnInit {
     this._fail.pipe(
       debounceTime(5000)
     ).subscribe(() => this.failMessage = '');
+
+    this._searchFail.subscribe(message => this.searchfailMessage = message);
+    this._searchFail.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.searchfailMessage = '');
   }
 
 
@@ -126,7 +134,7 @@ export class HomeComponent implements OnInit {
         this.restaurantList = data;
       },
       error => {
-        this._fail.next(`Failed to fetch data. Please try again.`);
+        this._searchFail.next(`Failed to fetch data. Please try again.`);
       }
     )
   }
@@ -136,7 +144,7 @@ export class HomeComponent implements OnInit {
         this.update_localStorage();
       },
       error => {
-        // this.router.navigate(['/login-component']);
+        this.router.navigate(['/login-component']);
       }
     );
   }
