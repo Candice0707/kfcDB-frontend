@@ -17,6 +17,15 @@ export interface Tag {
   name: string;
 }
 
+export interface Restaurant {
+  restaurant_id: number;
+  name: string;
+  address: string;
+  phone: string;
+  category: string;
+  rating: number;
+}
+
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -36,6 +45,7 @@ export class HomeComponent implements OnInit {
     {name: 'Apple'},
   ];
   
+  
   currentRate = 4.0;
 
 
@@ -45,9 +55,9 @@ export class HomeComponent implements OnInit {
   email : string;
   userID : number;
 
-
-
-
+  //search
+  searchkey:string;
+  
   // alert
   private _success = new Subject<string>();
   private _fail = new Subject<string>();

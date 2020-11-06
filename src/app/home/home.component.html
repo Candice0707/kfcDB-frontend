@@ -1,5 +1,13 @@
 <mat-tab-group>
     <mat-tab label="Explore">
+      <form class="search-form">
+        <mat-form-field class="full-width">
+          <mat-label>Search</mat-label>
+          <input matInput placeholder="Ex. Pizza" name="searchkey" [(ngModel)]="searchkey" >
+        </mat-form-field>
+      </form>
+     
+      
  
         <mat-grid-list class="restaurant-list" cols="3" rowHeight="4:5">
             <mat-grid-tile>
