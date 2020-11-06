@@ -85,14 +85,14 @@ export class HomeComponent implements OnInit {
     private userService : UserService,
     private route: ActivatedRoute,
     private router: Router) { 
-    
-    if (this.authenticationService.currentUserValue) {
+    let user = JSON.parse(localStorage.getItem('currentUser'));
+    this.userID = user.userID;
+    // if (this.authenticationService.currentUserValue) {
 
-      this.userID = this.authenticationService.currentUserSubject.value.id;
-      this.firstName = "candice";
-      this.lastName = "houhouhou";
-      this.email = "123@asd.com";
-    }
+    //   this.firstName = "candice";
+    //   this.lastName = "houhouhou";
+    //   this.email = "123@asd.com";
+    // }
     this.get_profile();
   }
   
