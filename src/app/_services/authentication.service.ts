@@ -20,9 +20,9 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
-    login(username, password) {
+    login(email, password) {
         console.log("try login");
-        return this.http.post<any>(`${this.apiUrl}/login`, { username, password })
+        return this.http.post<any>(`${this.apiUrl}/login`, { email, password })
             .pipe(map(user => {
                 console.log("posted");
                 console.log(user);
