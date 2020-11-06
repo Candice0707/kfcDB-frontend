@@ -4,7 +4,7 @@ import {MatChipInputEvent} from '@angular/material/chips';
 import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {MatDialogModule} from '@angular/material/dialog';
-import { MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { AuthenticationService} from '../_services';
 import { UserService } from '../_services'
 import { Router, ActivatedRoute } from '@angular/router';
@@ -152,7 +152,6 @@ export class HomeComponent implements OnInit {
     this.lastName = user.lastName;
     this.email = user.email;
   }
-
   delete_account() {
     this.authenticationService.delete_account(this.userID)
       .pipe(first())
@@ -165,6 +164,7 @@ export class HomeComponent implements OnInit {
         }
       );
   }
+
   openDialog() {
     const dialogRef = this.dialog.open(DeleteDialog);
 
@@ -182,4 +182,12 @@ export class HomeComponent implements OnInit {
   templateUrl: './delete-dialog.html',
   styleUrls: ['./home.component.scss']
 })
-export class DeleteDialog {}
+export class DeleteDialog {
+  constructor(
+    public dialogRef: MatDialogRef<DeleteDialog>){
+
+    }
+  onClick(message) {
+    this.dialogRef.close(message);
+  }
+}
