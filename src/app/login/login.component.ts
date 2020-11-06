@@ -3,6 +3,8 @@ import { analyzeAndValidateNgModules } from '@angular/compiler';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 
 import { AuthenticationService } from '../_services';
 
@@ -20,6 +22,11 @@ export class LoginComponent implements OnInit {
   loading = false;
   submitted = false;
   returnUrl: string;
+
+   // alert
+   private _fail = new Subject<string>();
+   staticAlertClosed = false;
+   failMessage = '';
 
     constructor(
         private formBuilder: FormBuilder,
@@ -41,6 +48,12 @@ export class LoginComponent implements OnInit {
 
         // get return url from route parameters or default to '/'
         this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '/';
+
+        // login failed alert
+        this._fail.subscribe(message => this.failMessage = message);
+        this._fail.pipe(
+            debounceTime(5000)
+        ).subscribe(() => this.failMessage = '');
     }
 
     // convenience getter for easy access to form fields
@@ -62,6 +75,7 @@ export class LoginComponent implements OnInit {
           },
           error => {
               this.loading = false;
+              this._fail.next(`Sign up Failed.`);
           });
     }
 }

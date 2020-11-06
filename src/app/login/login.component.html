@@ -6,7 +6,7 @@
       <form class="sign-in-form" [formGroup]="loginForm" >
         <mat-card-content>
           <mat-form-field class="card">
-            <input matInput name="email" formControlName="email" class="form-control" placeholder="email">
+            <input matInput name="email" formControlName="email" class="form-control" placeholder="Email">
           </mat-form-field>
   <br>
   <br>
@@ -17,9 +17,7 @@
         </mat-card-content>
         <br>
         <br>
-        <!-- <button class="sign-in-button" mat-raised-button color="primary" routerLink="/home-component" routerLinkActive="active">
-            Sign In
-        </button> -->
+
         <button class="sign-in-button" mat-raised-button color="primary" (click)="onSubmit()">
           Sign In
       </button>
@@ -28,6 +26,9 @@
             Sign Up
         </button>
         
+        <div class="notification">
+          <ngb-alert *ngIf="failMessage" type="warning" (close)="failMessage = ''">{{ failMessage }}</ngb-alert>
+        </div>
    
       </form>
     </mat-card>

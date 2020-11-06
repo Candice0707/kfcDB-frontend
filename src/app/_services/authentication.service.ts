@@ -7,7 +7,7 @@ import { User } from '../_models';
 
 @Injectable({ providedIn: 'root' })
 export class AuthenticationService {
-    private currentUserSubject: BehaviorSubject<User>;
+    public currentUserSubject: BehaviorSubject<User>;
     public currentUser: Observable<User>;
     private apiUrl : string = `http://localhost:5000`
 
@@ -50,5 +50,16 @@ export class AuthenticationService {
         // remove user from local storage and set current user to null
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
+    }
+
+    delete_account(userid) {
+        console.log("try delete account");
+        return this.http.post<any>(`${this.apiUrl}/delete_account`, {userid})
+            .pipe(map(user => {
+                console.log(user);
+                this.currentUserSubject.next(null);
+                console.log("return from delete account");
+                return user;
+            }));
     }
 }
