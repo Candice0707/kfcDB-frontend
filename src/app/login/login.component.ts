@@ -75,7 +75,7 @@ export class LoginComponent implements OnInit {
           },
           error => {
               this.loading = false;
-              this._fail.next(`Sign up Failed.`);
+              this._fail.next(`Login Failed.`);
           });
     }
 }
