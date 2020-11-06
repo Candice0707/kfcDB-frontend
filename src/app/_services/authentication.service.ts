@@ -51,4 +51,15 @@ export class AuthenticationService {
         localStorage.removeItem('currentUser');
         this.currentUserSubject.next(null);
     }
+
+    delete_account(userid) {
+        console.log("try delete account");
+        return this.http.post<any>(`${this.apiUrl}/delete_account`, {userid})
+            .pipe(map(user => {
+                console.log(user);
+                this.currentUserSubject.next(null);
+                console.log("return from delete account");
+                return user;
+            }));
+    }
 }

@@ -20,5 +20,17 @@ export class UserService {
         return this.currentUserSubject.value;
     }
 
+    update_profile(userid, firstname, lastname) {
+        console.log("try update profile");
+        return this.http.post<any>(`${this.apiUrl}/update_profile`, { userid, firstname,lastname })
+            .pipe(map(user => {
+                console.log(user);
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                this.currentUserSubject.next(user);
+                console.log("return from update");
+                return user;
+            }));
+    }
+
     
 }

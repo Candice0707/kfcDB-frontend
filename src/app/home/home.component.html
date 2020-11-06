@@ -73,6 +73,9 @@
           <div class="notification">
             <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
           </div>
+          <div class="notification">
+            <ngb-alert *ngIf="failMessage" type="warning" (close)="failMessage = ''">{{ failMessage }}</ngb-alert>
+          </div>
           
             <mat-form-field class="full-width">
               <mat-label>User ID (disabled)</mat-label>
@@ -93,7 +96,7 @@
             <p>
               <mat-form-field class="full-width">
                 <mat-label>Email Address</mat-label>
-                <textarea matInput [(ngModel)]="email" name="email" placeholder="Ex. xxxx@gmail.com"></textarea>
+                <textarea matInput disabled [(ngModel)]="email" name="email" placeholder="Ex. xxxx@gmail.com"></textarea>
               </mat-form-field>
             </p>
 
@@ -112,29 +115,11 @@
                         (matChipInputTokenEnd)="add($event)">
                 </mat-chip-list>
             </mat-form-field>
-
-
-            <!-- <table class="full-width" cellspacing="0"><tr>
-              <td><mat-form-field class="full-width">
-                <mat-label>City</mat-label>
-                <input matInput placeholder="Ex. San Francisco">
-              </mat-form-field></td>
-              <td><mat-form-field class="full-width">
-                <mat-label>State</mat-label>
-                <input matInput placeholder="Ex. California">
-              </mat-form-field></td>
-              <td><mat-form-field class="full-width">
-                <mat-label>Postal Code</mat-label>
-                <input matInput #postalCode maxlength="5" placeholder="Ex. 94105" value="94043">
-                <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-              </mat-form-field></td>
-            </tr></table> -->
             
           </form>
           <div class="profile-action">
-            <button mat-raised-button color="primary" (click)="changeSuccessMessage()">SAVE</button>
-            <!-- <button mat-button (click)="openDialog()">Delete Account</button> -->
-            <button mat-button>Delete Account</button>
+            <button mat-raised-button color="primary" (click)="update_profile()">SAVE</button>
+            <button mat-button (click)="openDialog()">Delete Account</button>
           </div>
           
     </mat-tab>
