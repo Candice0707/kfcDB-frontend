@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
+import {Subject} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
 import { AuthenticationService } from '../_services';
 
 @Component({
@@ -17,6 +18,11 @@ export class SignupComponent implements OnInit {
   signupGroup: FormGroup;
   loading = false;
   
+  // alert
+  private _fail = new Subject<string>();
+  staticAlertClosed = false;
+  failMessage = '';
+  
   constructor(private formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
@@ -29,6 +35,10 @@ export class SignupComponent implements OnInit {
       firstname: ['', Validators.required],
       lastname: ['', Validators.required]
   });
+    this._fail.subscribe(message => this.failMessage = message);
+      this._fail.pipe(
+        debounceTime(5000)
+      ).subscribe(() => this.failMessage = '');
   }
 
   get f() { return this.signupGroup.controls; }
@@ -50,6 +60,7 @@ export class SignupComponent implements OnInit {
             },
             error => {
                 this.loading = false;
+                this._fail.next(`Sign up Failed.`);
             });
     }
 }

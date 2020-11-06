@@ -22,10 +22,14 @@
           </mat-form-field>
         </mat-card-content>
         <br>
-        <br>
+        
         <button class="sign-up-button" mat-raised-button color="primary" (click)="onSubmit()" >
             OK!
         </button>
+<br>
+        <div class="notification">
+          <ngb-alert *ngIf="failMessage" type="warning" (close)="failMessage = ''">{{ failMessage }}</ngb-alert>
+        </div>
       </form>
     </mat-card>
   </div>

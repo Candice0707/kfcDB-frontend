@@ -5,6 +5,7 @@ import {Subject} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatDialog} from '@angular/material/dialog';
+import { AuthenticationService} from '../_services';
 
 
 export interface Tag {
@@ -29,9 +30,18 @@ export class HomeComponent implements OnInit {
     {name: 'Lime'},
     {name: 'Apple'},
   ];
-  userID = "hellothere";
-
+  
   currentRate = 4.0;
+
+
+  //profile
+  firstName : string;
+  lastName : string;
+  email : string;
+  userID : number;
+
+
+
 
   // alert
   private _success = new Subject<string>();
@@ -63,7 +73,14 @@ export class HomeComponent implements OnInit {
  
   
 
-  constructor(public dialog: MatDialog) { 
+  constructor(public dialog: MatDialog,
+    private authenticationService : AuthenticationService) { 
+    if (this.authenticationService.currentUserValue) {
+      this.userID = this.authenticationService.currentUserSubject.value.id;
+      // this.firstName = this.authenticationService.currentUser.firstName;
+      // this.lastName = this.authenticationService.currentUser.lastName;
+      // this.email = this.authenticationService.currentUser.email;
+    }
   }
   
 
@@ -75,7 +92,6 @@ export class HomeComponent implements OnInit {
   }
 
   public changeSuccessMessage() {
-    // this._success.next(`${new Date()} - Profile successfully updated.`);
     this._success.next(`Profile successfully updated.`);
   }
   // openDialog() {
