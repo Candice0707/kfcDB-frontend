@@ -52,9 +52,9 @@ export class AuthenticationService {
         this.currentUserSubject.next(null);
     }
 
-    delete_account(userid) {
+    delete_account(customer_id) {
         console.log("try delete account");
-        return this.http.post<any>(`${this.apiUrl}/delete_account`, {userid})
+        return this.http.post<any>(`${this.apiUrl}/delete_account`, { customer_id })
             .pipe(map(user => {
                 console.log(user);
                 this.currentUserSubject.next(null);

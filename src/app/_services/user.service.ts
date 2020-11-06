@@ -22,11 +22,7 @@ export class UserService {
 
     get_profile(userid) {
         console.log("try get userid");
-        // return this.http.get<Hero>(url).pipe(
-        //   tap(_ => this.log(`fetched hero id=${id}`)),
-        //   catchError(this.handleError<Hero>(`getHero id=${id}`))
-        // );
-        const url = `${this.apiUrl}/${userid}`;
+        const url = `${this.apiUrl}/get_profile/${userid}`;
         return this.http.get<any>(url)
             .pipe(map(user => {
                 console.log(user);
@@ -35,16 +31,11 @@ export class UserService {
                 console.log("return from get_profile");
                 return user;
             }));
-      }
-    update_profile(userid, firstname, lastname) {
+    }
+
+    update_profile(customer_id, firstname, lastname) {
         console.log("try update profile");
-        return this.http.post<any>(`${this.apiUrl}/update_profile`, { userid, firstname,lastname })
-            .pipe(map(user => {
-                console.log(user);
-                localStorage.setItem('currentUser', JSON.stringify(user));
-                this.currentUserSubject.next(user);
-                console.log("return from update");
-                return user;
-            }));
+        console.log("customer_id: ", customer_id)
+        return this.http.post<any>(`${this.apiUrl}/update_profile`, { customer_id, firstname,lastname });
     }
 }

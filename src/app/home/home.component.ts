@@ -85,14 +85,8 @@ export class HomeComponent implements OnInit {
     private userService : UserService,
     private route: ActivatedRoute,
     private router: Router) { 
-    let user = JSON.parse(localStorage.getItem('currentUser'));
-    this.userID = user.userID;
-    // if (this.authenticationService.currentUserValue) {
-
-    //   this.firstName = "candice";
-    //   this.lastName = "houhouhou";
-    //   this.email = "123@asd.com";
-    // }
+    this.update_localStorage();
+    console.log("constructor: ", this.userID);
     this.get_profile();
   }
   
@@ -123,7 +117,7 @@ export class HomeComponent implements OnInit {
         this.update_localStorage();
       },
       error => {
-        // this.router.navigate(['/login-component']);
+        this.router.navigate(['/login-component']);
       }
     );
   }
@@ -133,6 +127,7 @@ export class HomeComponent implements OnInit {
       this.changeFailMessage();
       return;
     }
+    console.log("userid: ", this.userID);
     this.userService.update_profile(this.userID, this.firstName, this.lastName)
         .pipe(first())
         .subscribe(
@@ -142,14 +137,15 @@ export class HomeComponent implements OnInit {
             },
             error => {
               this._fail.next(`Update Failed. Please fill in required fields and try again.`);
-            });
+            }
+            );
   }
 
   update_localStorage() {
     let user = JSON.parse(localStorage.getItem('currentUser'));
-    this.userID = user.userID;
-    this.firstName = user.firstName;
-    this.lastName = user.lastName;
+    this.userID = user.customer_id;
+    this.firstName = user.firstname;
+    this.lastName = user.lastname;
     this.email = user.email;
   }
   delete_account() {
