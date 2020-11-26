@@ -9,6 +9,8 @@ import { AuthenticationService, UserService, RestaurantService} from '../_servic
 import { Router, ActivatedRoute } from '@angular/router';
 import { Restaurant } from '../_models';
 import { first } from 'rxjs/operators';
+import { Inject } from '@angular/core';  
+
 
 
 
@@ -144,7 +146,7 @@ export class HomeComponent implements OnInit {
         this.update_localStorage();
       },
       error => {
-        this.router.navigate(['/login-component']);
+        // this.router.navigate(['/login-component']);
       }
     );
   }
@@ -200,7 +202,9 @@ export class HomeComponent implements OnInit {
   }
 
   openRateDialog(restaurant_id, restaurantName) {
-    const rateDialogRef = this.dialog.open(RateDialog);
+    const rateDialogRef = this.dialog.open(RateDialog, {
+      data: { restaurant_name: restaurantName},
+    });
 
     rateDialogRef.afterClosed().subscribe(result => {
       console.log(`Rate Dialog result: ${result}`);
@@ -237,8 +241,9 @@ export class DeleteDialog {
 })
 export class RateDialog {
   constructor(
-    public dialogRef: MatDialogRef<RateDialog>){
-
+    public dialogRef: MatDialogRef<RateDialog>,
+    @Inject(MAT_DIALOG_DATA) public data: {restaurant_name: string}){
+      
     }
   onClick(message) {
     this.dialogRef.close(message);

@@ -15,13 +15,14 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatGridListModule } from '@angular/material/grid-list';
 import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatFormFieldModule, MatLabel } from '@angular/material/form-field';
 import { MatChipsModule } from '@angular/material/chips';
 import { SignupComponent } from './signup/signup.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { RestaurantComponent } from './restaurant/restaurant.component';
+import { MatSliderModule } from '@angular/material/slider';
 
 
 
@@ -52,7 +53,9 @@ import { RestaurantComponent } from './restaurant/restaurant.component';
     MatChipsModule,
     NgbModule,
     MatDialogModule,
-    HttpClientModule
+    HttpClientModule,
+    MatLabel,
+    MatSliderModule
   ],
   providers: [],
   bootstrap: [AppComponent]
