@@ -198,6 +198,20 @@ export class HomeComponent implements OnInit {
       }
     });  
   }
+
+  openRateDialog(restaurant_id, restaurantName) {
+    const rateDialogRef = this.dialog.open(RateDialog);
+
+    rateDialogRef.afterClosed().subscribe(result => {
+      console.log(`Rate Dialog result: ${result}`);
+      console.log(restaurant_id + ':'+ restaurantName);
+      if(result == "true") {
+        //this.rateRestaurant(restaurant_id, flavor, enviorment, service);
+      }
+    });
+  }
+
+
 }
 
 @Component({
@@ -208,6 +222,22 @@ export class HomeComponent implements OnInit {
 export class DeleteDialog {
   constructor(
     public dialogRef: MatDialogRef<DeleteDialog>){
+
+    }
+  onClick(message) {
+    this.dialogRef.close(message);
+  }
+}
+
+
+@Component({
+  selector: 'rate-dialog',
+  templateUrl: './rate-dialog.html',
+  styleUrls: ['./home.component.scss']
+})
+export class RateDialog {
+  constructor(
+    public dialogRef: MatDialogRef<RateDialog>){
 
     }
   onClick(message) {

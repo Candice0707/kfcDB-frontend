@@ -1,0 +1,20 @@
+<h2 mat-dialog-title>Rate {{restaurant.name}}</h2>
+<div mat-dialog-content class="mat-typography">
+    <form class="rate-form">
+        <mat-form-field class=".full-width">
+            <mat-label>Flavor</mat-label>
+            <mat-slider></mat-slider>
+            <!-- <mat-slider
+            thumbLabel
+            [displayWith]="formatLabel"
+            tickInterval="0.1"
+            min="1"
+            max="5"></mat-slider> -->
+            
+        </mat-form-field>
+      </form>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button value="false" (click)="onClick('false')">Cancel</button>
+  <button mat-button (click)="onClick('true')" matDialogClose="true">Rate</button>
+</div>
