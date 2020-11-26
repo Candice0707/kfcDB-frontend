@@ -23,6 +23,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { MatSliderModule } from '@angular/material/slider';
+import { RateDialog, DeleteDialog } from './home/home.component'
 
 
 
@@ -32,7 +33,9 @@ import { MatSliderModule } from '@angular/material/slider';
     LoginComponent,
     HomeComponent,
     SignupComponent,
-    RestaurantComponent
+    RestaurantComponent,
+    RateDialog,
+    DeleteDialog
   ],
   imports: [
     BrowserModule,
@@ -54,8 +57,8 @@ import { MatSliderModule } from '@angular/material/slider';
     NgbModule,
     MatDialogModule,
     HttpClientModule,
-    MatLabel,
-    MatSliderModule
+    MatSliderModule,
+    // MatLabel
   ],
   providers: [],
   bootstrap: [AppComponent]

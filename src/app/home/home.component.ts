@@ -200,15 +200,22 @@ export class HomeComponent implements OnInit {
       }
     });  
   }
+  flavorRating: number;
+  environmentRating: number;
+  serviceRating : number;
 
   openRateDialog(restaurant_id, restaurantName) {
     const rateDialogRef = this.dialog.open(RateDialog, {
-      data: { restaurant_name: restaurantName},
-    });
+      data: { restaurant_name: restaurantName,
+        flavorRating: this.flavorRating,
+        environmentRating: this.environmentRating,
+        serviceRating: this.serviceRating
+    }});
 
     rateDialogRef.afterClosed().subscribe(result => {
       console.log(`Rate Dialog result: ${result}`);
       console.log(restaurant_id + ':'+ restaurantName);
+      console.log("service : "+ this.serviceRating);
       if(result == "true") {
         //this.rateRestaurant(restaurant_id, flavor, enviorment, service);
       }
@@ -245,6 +252,7 @@ export class RateDialog {
     @Inject(MAT_DIALOG_DATA) public data: {restaurant_name: string}){
       
     }
+  
   onClick(message) {
     this.dialogRef.close(message);
   }
