@@ -191,6 +191,10 @@ export class HomeComponent implements OnInit {
       );
   }
 
+  navigateTo(restaurant_id, restaurant_name) {
+    this.router.navigate(['/restaurant-component', {restaurant_id:restaurant_id, restaurant_name:restaurant_name}]);
+  }
+
   openDialog() {
     const dialogRef = this.dialog.open(DeleteDialog);
 
