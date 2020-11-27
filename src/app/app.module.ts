@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -22,8 +21,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MatDialogModule } from '@angular/material/dialog';
 import { HttpClientModule } from '@angular/common/http';
 import { RestaurantComponent } from './restaurant/restaurant.component';
+import { DeleteDialog } from './home/home.component';
+import { RateDialogComponent } from './rate-dialog/rate-dialog.component'
 import { MatSliderModule } from '@angular/material/slider';
-import { RateDialog, DeleteDialog } from './home/home.component'
+
+
 
 
 
@@ -34,8 +36,8 @@ import { RateDialog, DeleteDialog } from './home/home.component'
     HomeComponent,
     SignupComponent,
     RestaurantComponent,
-    RateDialog,
-    DeleteDialog
+    DeleteDialog,
+    RateDialogComponent
   ],
   imports: [
     BrowserModule,

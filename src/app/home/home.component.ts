@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {COMMA, ENTER} from '@angular/cdk/keycodes';
 import {MatChipInputEvent} from '@angular/material/chips';
-import {Subject} from 'rxjs';
+import {Subject, from} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
@@ -9,7 +9,8 @@ import { AuthenticationService, UserService, RestaurantService} from '../_servic
 import { Router, ActivatedRoute } from '@angular/router';
 import { Restaurant } from '../_models';
 import { first } from 'rxjs/operators';
-import { Inject } from '@angular/core';  
+import { RateDialogComponent} from '../rate-dialog/rate-dialog.component';
+
 
 
 
@@ -205,17 +206,18 @@ export class HomeComponent implements OnInit {
   serviceRating : number;
 
   openRateDialog(restaurant_id, restaurantName) {
-    const rateDialogRef = this.dialog.open(RateDialog, {
+    const rateDialogRef = this.dialog.open(RateDialogComponent, {
       data: { restaurant_name: restaurantName,
         flavorRating: this.flavorRating,
         environmentRating: this.environmentRating,
-        serviceRating: this.serviceRating
+        serviceRating: this.serviceRating,
+        userID: this.userID
     }});
 
     rateDialogRef.afterClosed().subscribe(result => {
-      console.log(`Rate Dialog result: ${result}`);
+      // console.log(`Rate Dialog result: ${result}`);
       console.log(restaurant_id + ':'+ restaurantName);
-      console.log("service : "+ this.serviceRating);
+      console.log("service : "+ result.serviceRating);
       if(result == "true") {
         //this.rateRestaurant(restaurant_id, flavor, enviorment, service);
       }
@@ -235,24 +237,6 @@ export class DeleteDialog {
     public dialogRef: MatDialogRef<DeleteDialog>){
 
     }
-  onClick(message) {
-    this.dialogRef.close(message);
-  }
-}
-
-
-@Component({
-  selector: 'rate-dialog',
-  templateUrl: './rate-dialog.html',
-  styleUrls: ['./home.component.scss']
-})
-export class RateDialog {
-  constructor(
-    public dialogRef: MatDialogRef<RateDialog>,
-    @Inject(MAT_DIALOG_DATA) public data: {restaurant_name: string}){
-      
-    }
-  
   onClick(message) {
     this.dialogRef.close(message);
   }
