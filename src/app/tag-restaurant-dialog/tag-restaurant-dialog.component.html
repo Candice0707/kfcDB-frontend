@@ -1,0 +1,10 @@
+<h2 mat-dialog-title>Tag {{data.restaurant_name}} </h2>
+<div mat-dialog-content class="mat-typography">
+  <h3>I think {{data.restaurant_name}} is ...</h3>
+  <input matInput name="newTag" [(ngModel)]="data.newTag"  placeholder="New Tag">
+
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button value="false" (click)="onClick('false')">Cancel</button>
+  <button mat-button [mat-dialog-close]="data">Tag</button>
+</div>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { Inject } from '@angular/core';  
-import {MatSliderModule} from '@angular/material/slider';
 
 
 @Component({

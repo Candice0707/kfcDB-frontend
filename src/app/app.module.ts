@@ -24,6 +24,7 @@ import { RestaurantComponent } from './restaurant/restaurant.component';
 import { DeleteDialog } from './home/home.component';
 import { RateDialogComponent } from './rate-dialog/rate-dialog.component'
 import { MatSliderModule } from '@angular/material/slider';
+import { TagRestaurantDialogComponent } from './tag-restaurant-dialog/tag-restaurant-dialog.component';
 
 
 
@@ -36,7 +37,8 @@ import { MatSliderModule } from '@angular/material/slider';
     SignupComponent,
     RestaurantComponent,
     DeleteDialog,
-    RateDialogComponent
+    RateDialogComponent,
+    TagRestaurantDialogComponent
   ],
   imports: [
     BrowserModule,

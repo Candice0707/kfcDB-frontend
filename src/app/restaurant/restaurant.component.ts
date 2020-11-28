@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'; 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RateDialogComponent} from '../rate-dialog/rate-dialog.component';
+import { TagRestaurantDialogComponent } from '../tag-restaurant-dialog/tag-restaurant-dialog.component'
 
 export interface Tag {
   name: string;
@@ -33,6 +34,9 @@ export class RestaurantComponent implements OnInit {
   flavorRating: number;
   environmentRating: number;
   serviceRating: number;
+
+  //new tag
+  newTag: string;
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -67,6 +71,25 @@ export class RestaurantComponent implements OnInit {
       console.log("service : "+ result.serviceRating);
       if(result == "true") {
         //this.rateRestaurant(restaurant_id, flavor, enviorment, service);
+      }
+    });
+  }
+
+  openTagDialog(restaurant_id) {
+    const tagDialogRef = this.dialog.open(TagRestaurantDialogComponent, {
+      data: { restaurant_name: this.restaurant_name,
+        newTag: this.newTag,
+        restaurant_id: restaurant_id,
+        userID: this.userID
+    }});
+
+    tagDialogRef.afterClosed().subscribe(result => {
+      // console.log(`Rate Dialog result: ${result}`);
+      console.log(restaurant_id + ':'+ this.restaurant_name);
+      console.log("tag : "+ result.newTag);
+      this.newTag = result.newTag;
+      if(result == "true") {
+        //this.TagRestaurant(restaurant_id, flavor, enviorment, service);
       }
     });
   }

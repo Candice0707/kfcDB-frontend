@@ -52,7 +52,7 @@
                 {{tag.name}}   {{tag.freq}}
                 </mat-chip>
                 </mat-chip-list>
-                <button mat-button color="accent">Tag {{this.restaurant_name}} Here</button>
+                <button mat-button color="accent" (click)="openTagDialog(this.restaurant_id)">Tag {{this.restaurant_name}} Here</button>
 
         </div>
     
