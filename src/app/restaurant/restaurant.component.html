@@ -37,20 +37,23 @@
                 <p>
                     {{this.rating}}
                 </p>
-                
+                <button mat-button color="accent" (click)="openRateDialog(this.restaurant_id, this.restaurant_name)">Rate {{this.restaurant_name}} Here</button>
+
             </div>
         </div>
         <div class="charts">
             COMING SOON..
         </div>
         <div class="tag-column">
-            <p> People think {{this.restaurant_name}} is ... </p>
-            <mat-chip-list #chipList aria-label="Tag selection">
+            <mat-label> People think {{this.restaurant_name}} is ... </mat-label>
+            <mat-chip-list #chipList aria-label="Tag selection" class="tagList">
                 <mat-chip *ngFor="let tag of restaurant_tags" [selectable]="selectable"
                         >
-                {{tag.name}}  
+                {{tag.name}}   {{tag.freq}}
                 </mat-chip>
                 </mat-chip-list>
+                <button mat-button color="accent">Tag {{this.restaurant_name}} Here</button>
+
         </div>
     
     </div>
