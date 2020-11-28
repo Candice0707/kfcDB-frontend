@@ -87,7 +87,7 @@ export class RestaurantComponent implements OnInit {
       // console.log(`Rate Dialog result: ${result}`);
       console.log(restaurant_id + ':'+ this.restaurant_name);
       console.log("tag : "+ result.newTag);
-      this.newTag = result.newTag;
+      // this.newTag = result.newTag;
       if(result == "true") {
         //this.TagRestaurant(restaurant_id, flavor, enviorment, service);
       }
