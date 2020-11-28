@@ -11,7 +11,9 @@ export class RestaurantComponent implements OnInit {
   restaurant_id : string;
   restaurant_name : string;
   constructor(private route: ActivatedRoute,
-    private router: Router) { }
+    private router: Router) {
+    this.getRestaurantData();   
+  }
 
   ngOnInit(): void {
   }
@@ -19,5 +21,6 @@ export class RestaurantComponent implements OnInit {
   getRestaurantData() {
     this.restaurant_id = this.route.snapshot.paramMap.get("restaurant_id");
     this.restaurant_name = this.route.snapshot.paramMap.get("restaurant_name");
+    // todo: get restaurant data api
   }
 }
