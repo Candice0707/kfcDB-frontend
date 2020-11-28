@@ -1,5 +1,10 @@
+.body {
+    vertical-align: baseline;
+
+}
 .title {
     display: inline-flex;
+    width: 100%;
     padding-left: 40px;
     padding-top: 20px;
     color:coral;
@@ -11,5 +16,36 @@
 h2 {
     margin-bottom: 5px;
     font-size: 20pt;
+}
+
+.content {
+    display: inline-flex;
+    padding-left: 100px;
+    padding-right: 200px;
+    padding-top: 20px;
+    width:100%;
+}
+
+.info {
+    flex: 1;
+}
+
+.info-item {
+    width: 100%;
+}
+mat-label {
+    width: 100%;
+    font-size: 16pt;
+    color: coral;
+}
+
+
+
+.charts {
+    flex: 3;
+    padding-inline-end: 20px;
+}
+.tag-column {
+    flex: 1;
 }
 

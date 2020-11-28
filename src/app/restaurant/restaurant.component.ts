@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'; 
-
+export interface Tag {
+  name: string;
+  freq: number;
+}
 
 @Component({
   selector: 'app-restaurant',
@@ -10,6 +13,18 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class RestaurantComponent implements OnInit {
   restaurant_id : string;
   restaurant_name : string;
+  phone = "217-123-1234";
+  address = "123 St, Champaign, IL";
+  rating = 4;
+  category = "boba";
+
+  restaurant_tags: Tag[] = [
+    {name: 'Super cozy', freq: 30},
+    {name: 'Coffee', freq: 18},
+    {name: 'Matcha Loversss', freq: 9},
+    {name: 'Music Live!', freq: 3}
+  ];
+
   constructor(private route: ActivatedRoute,
     private router: Router) {
     this.getRestaurantData();   
