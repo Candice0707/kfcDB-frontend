@@ -40,10 +40,10 @@ export class HomeComponent implements OnInit {
   
   // restaurant list
   restaurantList: Restaurant[] = [
-    {restaurant_id: 1, name: "teamoji", address: "123 St, Champaign, IL", phone: "234-123-5467",  category: "boba", rating: 4},
-    {restaurant_id: 2, name: "cafe bene", address: "23 St, Champaign, IL", phone: "123-355-1234",  category: "korean", rating: 3.4},
-    {restaurant_id: 3, name: "oshis", address: "1553 St, Champaign, IL", phone: "512-235-1234",  category: "ramen", rating: 2},
-    {restaurant_id: 4, name: "saska", address: "1123 St, Champaign, IL", phone: "123-578-4214",  category: "sushi", rating: 5}
+    {restaurant_id: 1, name: "teamoji", address: "123 St, Champaign, IL", phone: "234-123-5467",  category: "boba", ratings: 4, image_url:"https://material.angular.io/assets/img/examples/shiba2.jpg"},
+    {restaurant_id: 2, name: "cafe bene", address: "23 St, Champaign, IL", phone: "123-355-1234",  category: "korean", ratings: 3.4, image_url:"https://material.angular.io/assets/img/examples/shiba2.jpg"},
+    {restaurant_id: 3, name: "oshis", address: "1553 St, Champaign, IL", phone: "512-235-1234",  category: "ramen", ratings: 2, image_url:"https://material.angular.io/assets/img/examples/shiba2.jpg"},
+    {restaurant_id: 4, name: "saska", address: "1123 St, Champaign, IL", phone: "123-578-4214",  category: "sushi", ratings: 5, image_url:"https://material.angular.io/assets/img/examples/shiba2.jpg"}
   ];
   currentRate = 4.0;
 

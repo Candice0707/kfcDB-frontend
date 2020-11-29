@@ -6,5 +6,6 @@ export class Restaurant {
     address: string;
     phone: string;
     category: string;
-    rating: number;
+    ratings: number;
+    image_url: string;
   }
