@@ -18,13 +18,14 @@ export class RateDialogComponent implements OnInit {
       flavorRating: number,
       environmentRating: number,
       serviceRating: number
-      userID:string
+      userID:string,
+      status: 'false'
     }){
       
     }
   
-  onClick(message) {
-    this.dialogRef.close(message);
+  onClick() {
+    this.dialogRef.close();
   }
 
   ngOnInit(): void {

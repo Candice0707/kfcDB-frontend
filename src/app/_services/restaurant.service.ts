@@ -42,4 +42,9 @@ export class RestaurantService {
         console.log("try get tag restaurant");
         return this.http.post<any>(`${this.apiUrl}/tag_restaurant`, {customer_id, tag, restaurant_id});
     }
+
+    rateRestaurant(customer_id, restaurant_id, flav_rating, env_rating, serv_rating) {
+        console.log("rate restaurant");
+        return this.http.post<any>(`${this.apiUrl}/rate_restaurant`, {customer_id, restaurant_id, flav_rating, env_rating, serv_rating});
+    }
 }

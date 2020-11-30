@@ -14,7 +14,8 @@ export class TagRestaurantDialogComponent implements OnInit {
     restaurant_name: string,
     newTag: string,
     restaurant_id: number,
-    userID:string
+    userID:string,
+    status: 'false'
   }) { }
 
   onClick(message) {

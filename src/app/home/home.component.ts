@@ -102,7 +102,6 @@ export class HomeComponent implements OnInit {
     console.log("constructor: ", this.userID);
     this.get_profile();
     this.get_restaurant_list();
-    // this.get_tags();
     
   }
   
@@ -151,6 +150,7 @@ export class HomeComponent implements OnInit {
         // this.router.navigate(['/login-component']);
       }
     );
+    this.get_tags();
   }
 
   get_tags() {
@@ -164,11 +164,11 @@ export class HomeComponent implements OnInit {
     );
   }
   update_profile() {
+    this.update_tags();
     if(this.lastName.length == 0 || this.firstName.length == 0) {
-      this.changeFailMessage();
+      // this.changeFailMessage();
       return;
     }
-    console.log("userid: ", this.userID);
     this.userService.update_profile(this.userID, this.firstName, this.lastName)
         .pipe(first())
         .subscribe(
@@ -180,6 +180,21 @@ export class HomeComponent implements OnInit {
               this._fail.next(`Update Failed. Please fill in required fields and try again.`);
             }
             );
+    
+  }
+
+  update_tags() {
+    this.userService.update_tags(this.userID, this.tags).pipe(first())
+      .subscribe(
+        data => {
+          this.changeSuccessMessage();
+          this.get_tags();
+        },
+        error => {
+          this._fail.next(`Update Tags Failed. Please fill in required fields and try again.`);
+        }
+      )
+    
   }
 
   update_localStorage() {

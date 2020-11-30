@@ -6,6 +6,7 @@ import { TagRestaurantDialogComponent } from '../tag-restaurant-dialog/tag-resta
 import { RestaurantService} from '../_services';
 import {Subject, from} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
+import { Console } from 'console';
 
 
 export interface Tag {
@@ -135,18 +136,42 @@ export class RestaurantComponent implements OnInit {
         flavorRating: this.flavorRating,
         environmentRating: this.environmentRating,
         serviceRating: this.serviceRating,
-        userID: this.userID
+        userID: this.userID,
+        status: 'false'
     }});
 
     rateDialogRef.afterClosed().subscribe(result => {
       // console.log(`Rate Dialog result: ${result}`);
       console.log(restaurant_id + ':'+ restaurantName);
-      console.log("service : "+ result.serviceRating);
-      if(result == "true") {
-        //this.rateRestaurant(restaurant_id, flavor, enviorment, service);
+      console.log("rate status : "+ result.status);
+      if(result.status =='true' ) {
+        
+        this.flavorRating = result.flavorRating;
+        this.environmentRating = result.environmentRating;
+        this.serviceRating = result.serviceRating;
+        this.rateRestaurant();
       }
+      this.flavorRating = 0;
+      this.environmentRating = 0;
+      this.serviceRating = 0;
     });
   }
+
+  rateRestaurant() {
+    console.log("flav: " + this.flavorRating);
+    this.restaurantService.rateRestaurant(this.userID,this.restaurant_id, this.flavorRating, 
+      this.environmentRating, this.serviceRating)
+        .pipe().subscribe(
+          data => {
+            this.rateSuccessMessage();
+            this.get_restaurant_profile(this.restaurant_id);
+          },
+          error => {
+            this._fail.next(`Update Failed. Please fill in required fields and try again.`);
+          }
+        );
+  }
+
 
   openTagDialog(restaurant_id) {
     const tagDialogRef = this.dialog.open(TagRestaurantDialogComponent, {
@@ -157,11 +182,8 @@ export class RestaurantComponent implements OnInit {
     }});
 
     tagDialogRef.afterClosed().subscribe(result => {
-      // console.log(`Rate Dialog result: ${result}`);
-      console.log(restaurant_id + ':'+ this.restaurant_name);
-      // console.log("tag : "+ result.newTag);
-      // this.newTag = result.newTag;
-      if(result != "false") {
+      console.log("tag status : "+ result.status);
+      if(result.status =='true' ) {
         this.tagRestaurant(result.newTag);
       }
     });
@@ -185,3 +207,4 @@ export class RestaurantComponent implements OnInit {
   }
 
 }
+
