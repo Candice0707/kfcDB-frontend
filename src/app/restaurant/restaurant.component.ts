@@ -89,7 +89,6 @@ export class RestaurantComponent implements OnInit {
     {value: 10, viewValue: '10 tags'},
     {value: 20, viewValue: '20 tags'},
     {value: 50, viewValue: '50 tags'},
-    {value: 100, viewValue: '100 tags'}
   ];
 
   constructor(private route: ActivatedRoute,
