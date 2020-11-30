@@ -7,7 +7,21 @@
             </mat-option>
         </mat-select>
     </mat-form-field> 
-    <button mat-button color="accent" (click)="getGroupAvgRating(ratingCategory)">Display</button> 
+    <button mat-button color="accent" (click)="getData()">Display</button> 
+<div class="chart">
+    <dx-chart
+    id="chart"
+    [dataSource]="chartData">
+    <dxi-series
+        argumentField="ratingbin"
+        valueField="frequency"
+        name="frequency"
+        type="bar"
+        color="#ffaa66">
+    </dxi-series>
+</dx-chart>
+</div>
+    
 
 </div>
 <div mat-dialog-actions>
