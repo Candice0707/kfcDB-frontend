@@ -26,6 +26,7 @@ import { RateDialogComponent } from './rate-dialog/rate-dialog.component'
 import { MatSliderModule } from '@angular/material/slider';
 import { TagRestaurantDialogComponent } from './tag-restaurant-dialog/tag-restaurant-dialog.component';
 import { TagCloudModule } from 'angular-tag-cloud-module';
+import {MatSelectModule} from '@angular/material/select';
 
 
 
@@ -63,7 +64,8 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
     MatDialogModule,
     HttpClientModule,
     MatSliderModule,
-    TagCloudModule
+    TagCloudModule,
+    MatSelectModule
     // MatLabel
   ],
   providers: [],

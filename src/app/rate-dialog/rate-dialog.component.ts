@@ -19,7 +19,7 @@ export class RateDialogComponent implements OnInit {
       environmentRating: number,
       serviceRating: number
       userID:string,
-      status: 'false'
+      status: boolean
     }){
       
     }

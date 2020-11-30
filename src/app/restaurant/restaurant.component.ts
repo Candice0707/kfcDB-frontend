@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router'; 
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RateDialogComponent} from '../rate-dialog/rate-dialog.component';
@@ -15,12 +15,18 @@ export interface Tag {
   freq: number;
 }
 
+export interface DisplayOption {
+  value: number;
+  viewValue: string;
+}
+
 @Component({
   selector: 'app-restaurant',
   templateUrl: './restaurant.component.html',
   styleUrls: ['./restaurant.component.scss']
 })
 export class RestaurantComponent implements OnInit {
+  
   restaurant_info = {
     restaurant_id : '',
     restaurant_name : "",
@@ -77,6 +83,13 @@ export class RestaurantComponent implements OnInit {
     {text: 'sea', weight: 25}
     // ...
   ];
+  displayLimit = 20;
+  displayOptions: DisplayOption[] = [
+    {value: 10, viewValue: '10 tags'},
+    {value: 20, viewValue: '20 tags'},
+    {value: 50, viewValue: '50 tags'},
+    {value: 100, viewValue: '100 tags'}
+  ];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -89,6 +102,7 @@ export class RestaurantComponent implements OnInit {
     if(this.userID == 1) {
       this.adminAccount = true;
     }
+    this.getVisitedCustomerTags(this.displayLimit);
   }
 
   ngOnInit(): void {
@@ -124,9 +138,12 @@ export class RestaurantComponent implements OnInit {
 
   //word cloud
   openData(clicked: CloudData){
-    console.log(clicked);
-    // word
-    console.log(clicked.srcElement.innerText);
+    if(clicked.srcElement.nodeName == 'SPAN') {
+      console.log(clicked);
+      // word
+      console.log(clicked.srcElement.innerText);
+    }
+    
   }
 
 
@@ -149,7 +166,7 @@ export class RestaurantComponent implements OnInit {
   }
 
   get_retaurant_tags(restaurant_id, length) {
-    this.restaurantService.getRestaurantTags(restaurant_id, length).pipe().subscribe(
+    this.restaurantService.getRestaurantTags(Number(restaurant_id), length).pipe().subscribe(
       data => {
         this.restaurant_tags = data;
       },
@@ -226,7 +243,7 @@ export class RestaurantComponent implements OnInit {
       this.tagFailMessage();
       return;
     }
-    this.restaurantService.tagRestaurant(this.userID, tag, this.restaurant_id)
+    this.restaurantService.tagRestaurant(this.userID, tag, Number(this.restaurant_id))
         .pipe().subscribe(
           data => {
             this.tagSuccessMessage();
@@ -250,5 +267,18 @@ export class RestaurantComponent implements OnInit {
     );
   }
 
+  //word cloud
+  getVisitedCustomerTags(length) {
+    this.restaurantService.get_visited_customers_tags(Number(this.restaurant_id), length).pipe()
+      .subscribe(
+        data => {
+          this.cloudData = data;
+          
+        },
+        error => {
+          this._fail.next(`Failed to fetch cloud data. Please try again.`);
+        }
+      )
+  }
 }
 

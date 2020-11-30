@@ -88,7 +88,15 @@
             </div>
         </div>
         <div class="charts">
-            COMING SOON..
+            <h2> People who visited {{this.restaurant_name}} are ...</h2>
+            <button mat-button color="accent" (click)="getVisitedCustomerTags(displayLimit)">Display</button> at most
+            <mat-form-field appearance="fill">
+            <mat-select [(ngModel)]="displayLimit" name="displayLimit">
+                <mat-option *ngFor="let option of displayOptions" [value]="option.value">
+                  {{option.viewValue}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field> 
             <div>
                 <angular-tag-cloud
                   [data]="cloudData"

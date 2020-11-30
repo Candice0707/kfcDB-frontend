@@ -52,4 +52,13 @@ export class RestaurantService {
         console.log("try delete restaurant");
         return this.http.post<any>(`${this.apiUrl}/delete_restaurant`, {restaurant_id});
     }
+
+    //data visualization
+
+    //word cloud
+    get_visited_customers_tags(restaurant_id, length) {
+        console.log("word cloud, get visited customers tags");
+        return this.http.post<any>(`${this.apiUrl}/get_visited_customer_tags`, {restaurant_id, length});
+    }
+
 }
