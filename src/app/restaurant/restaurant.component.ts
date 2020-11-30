@@ -7,6 +7,7 @@ import { RestaurantService} from '../_services';
 import {Subject, from} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
 import { CloudData, CloudOptions,ZoomOnHoverOptions } from 'angular-tag-cloud-module';
+import { ChartDialogComponent } from '../chart-dialog/chart-dialog.component'
 
 
 
@@ -142,9 +143,19 @@ export class RestaurantComponent implements OnInit {
       console.log(clicked);
       // word
       console.log(clicked.srcElement.innerText);
+      this.openChartDialog(clicked.srcElement.innerText);
     }
-    
   }
+
+  openChartDialog(customer_tag) {
+    const rateDialogRef = this.dialog.open(ChartDialogComponent, {
+      data: { 
+        restaurant_id: this.restaurant_id,
+        restaurant_name: this.restaurant_name,
+        customer_tag: customer_tag
+    }});
+  }
+
 
 
   getRestaurantData() {

@@ -61,4 +61,9 @@ export class RestaurantService {
         return this.http.post<any>(`${this.apiUrl}/get_visited_customer_tags`, {restaurant_id, length});
     }
 
+    // columns
+    get_group_avg_rating(restaurant_id, customer_tag, rating_category) {
+        console.log("bar cahrts, get group average ratings");
+        return this.http.post<any>(`${this.apiUrl}/get_group_avg_rating`, {restaurant_id, customer_tag,rating_category});
+    }
 }
