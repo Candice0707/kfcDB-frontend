@@ -64,21 +64,17 @@ export class RestaurantComponent implements OnInit {
   searchfailMessage = '';
 
   // word cloud
-  options: CloudOptions = {
-    // if width is between 0 and 1 it will be set to the width of the upper element multiplied by the value
-    // width: 1000,
-    // // // if height is between 0 and 1 it will be set to the height of the upper element multiplied by the value
-    // height: 400,
-    // overflow: false,
-  };
   zoomOnHoverOptions: ZoomOnHoverOptions = {
     scale: 1.3, // Elements will become 130 % of current zize on hover
     transitionTime: 0.5, // it will take 1.2 seconds until the zoom level defined in scale property has been reached
     delay: 0.1 // Zoom will take affect after 0.8 seconds
   };
   cloudData: CloudData[] = [
-    {text: 'Weight-8-link-color', weight: 8 , },
-    {text: 'Weight-10-link', weight: 10, },
+    {text: 'Woood1', weight: 19},
+    {text: 'Apple', weight: 33},
+    {text: 'Lemon', weight: 10},
+    {text: 'fff', weight: 20},
+    {text: 'sea', weight: 25}
     // ...
   ];
 
@@ -129,6 +125,8 @@ export class RestaurantComponent implements OnInit {
   //word cloud
   openData(clicked: CloudData){
     console.log(clicked);
+    // word
+    console.log(clicked.srcElement.innerText);
   }
 
 
