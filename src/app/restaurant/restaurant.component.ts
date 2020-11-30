@@ -6,7 +6,8 @@ import { TagRestaurantDialogComponent } from '../tag-restaurant-dialog/tag-resta
 import { RestaurantService} from '../_services';
 import {Subject, from} from 'rxjs';
 import {debounceTime} from 'rxjs/operators';
-import { Console } from 'console';
+import { CloudData, CloudOptions,ZoomOnHoverOptions } from 'angular-tag-cloud-module';
+
 
 
 export interface Tag {
@@ -21,7 +22,7 @@ export interface Tag {
 })
 export class RestaurantComponent implements OnInit {
   restaurant_info = {
-    restaurant_id : "",
+    restaurant_id : '',
     restaurant_name : "",
     phone : "",
     address :"123 St, Champaign, IL",
@@ -61,6 +62,25 @@ export class RestaurantComponent implements OnInit {
   successMessage = '';
   failMessage = '';
   searchfailMessage = '';
+
+  // word cloud
+  options: CloudOptions = {
+    // if width is between 0 and 1 it will be set to the width of the upper element multiplied by the value
+    // width: 1000,
+    // // // if height is between 0 and 1 it will be set to the height of the upper element multiplied by the value
+    // height: 400,
+    // overflow: false,
+  };
+  zoomOnHoverOptions: ZoomOnHoverOptions = {
+    scale: 1.3, // Elements will become 130 % of current zize on hover
+    transitionTime: 0.5, // it will take 1.2 seconds until the zoom level defined in scale property has been reached
+    delay: 0.1 // Zoom will take affect after 0.8 seconds
+  };
+  cloudData: CloudData[] = [
+    {text: 'Weight-8-link-color', weight: 8 , },
+    {text: 'Weight-10-link', weight: 10, },
+    // ...
+  ];
 
   constructor(private route: ActivatedRoute,
     private router: Router,
@@ -105,6 +125,12 @@ export class RestaurantComponent implements OnInit {
   public tagFailMessage() {
     this._fail.next(`Please fill in required fields and try again.`);
   }
+
+  //word cloud
+  openData(clicked: CloudData){
+    console.log(clicked);
+  }
+
 
   getRestaurantData() {
     this.restaurant_id = this.route.snapshot.paramMap.get("restaurant_id");

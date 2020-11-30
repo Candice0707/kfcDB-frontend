@@ -89,6 +89,13 @@
         </div>
         <div class="charts">
             COMING SOON..
+            <div>
+                <angular-tag-cloud
+                  [data]="cloudData"
+                  (click) = "openData($event)"
+                  [zoomOnHover]="zoomOnHoverOptions">
+                </angular-tag-cloud>
+              </div>
         </div>
         <div class="tag-column">
             <mat-label> People think {{this.restaurant_name}} is ... </mat-label>
