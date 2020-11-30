@@ -1,6 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import { Inject } from '@angular/core';  
+import { Inject } from '@angular/core';
+
+interface DisplayOption {
+  value: string;
+  viewValue: string;
+}
+
 
 @Component({
   selector: 'app-chart-dialog',
@@ -9,6 +15,15 @@ import { Inject } from '@angular/core';
 })
 export class ChartDialogComponent implements OnInit {
 
+  ratingCategory: string;
+  categories: DisplayOption[] = [
+    {value: "all", viewValue: 'all categories'},
+    {value: "general", viewValue: 'General Rating'},
+    {value: "flavor", viewValue: 'Flavor Rating'},
+    {value: "service", viewValue: 'Service Rating'},
+    {value: "environment", viewValue: 'Environment Rating'},
+  ];
+
   constructor(
     public dialogRef: MatDialogRef<ChartDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: {
@@ -16,7 +31,7 @@ export class ChartDialogComponent implements OnInit {
       restaurant_name: string,
       customer_tag: string
     }){
-      
+      this.ratingCategory = 'general';
     }
   ngOnInit(): void {
   }

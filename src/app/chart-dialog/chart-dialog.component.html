@@ -1,6 +1,14 @@
-<h1 mat-dialog-title>Chart Dialog</h1>
+<h1 mat-dialog-title>Let's see how people tagged with {{data.customer_tag}} like about {{data.restaurant_name}} :) </h1>
 <div mat-dialog-content>
-    COMMING SOON...
+    <mat-form-field >
+        <mat-select [(ngModel)]="ratingCategory" name="ratingCategory">
+            <mat-option *ngFor="let option of categories" [value]="option.value">
+                {{option.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field> 
+    <button mat-button color="accent" (click)="getGroupAvgRating(ratingCategory)">Display</button> 
+
 </div>
 <div mat-dialog-actions>
   <button mat-button mat-dialog-close>Close</button>

@@ -91,7 +91,7 @@
         <div class="charts">
             <h2> People who visited {{this.restaurant_name}} are ...</h2>
             <button mat-button color="accent" (click)="getVisitedCustomerTags(displayLimit)">Display</button> at most
-            <mat-form-field appearance="fill">
+            <mat-form-field>
             <mat-select [(ngModel)]="displayLimit" name="displayLimit">
                 <mat-option *ngFor="let option of displayOptions" [value]="option.value">
                   {{option.viewValue}}

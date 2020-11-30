@@ -28,6 +28,8 @@ import { TagRestaurantDialogComponent } from './tag-restaurant-dialog/tag-restau
 import { TagCloudModule } from 'angular-tag-cloud-module';
 import {MatSelectModule} from '@angular/material/select';
 import { ChartDialogComponent } from './chart-dialog/chart-dialog.component';
+import { DxChartModule } from 'devextreme-angular';
+
 
 
 
@@ -67,7 +69,8 @@ import { ChartDialogComponent } from './chart-dialog/chart-dialog.component';
     HttpClientModule,
     MatSliderModule,
     TagCloudModule,
-    MatSelectModule
+    MatSelectModule,
+    DxChartModule
     // MatLabel
   ],
   providers: [],
