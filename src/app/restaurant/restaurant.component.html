@@ -9,14 +9,14 @@
     <div class="content">
         <div class="info">
             <div class="info-item">
-                <p>{{this.category}}</p>
+                <p>{{this.restaurant_info.category}}</p>
             </div>
             <br>
             <div class="info-item">
                 <mat-label>Address</mat-label>
                 <br>
                 <p>
-                    {{this.address}}
+                    {{this.restaurant_info.address}}
                 </p>
             </div>
             <br>
@@ -25,7 +25,7 @@
                 <mat-label>Contact</mat-label>
                 <br>
                 <p>
-                    {{this.phone}}
+                    {{this.restaurant_info.phone}}
                 </p>
                 
             </div>
@@ -35,7 +35,47 @@
                 <mat-label>Ratings</mat-label>
                 <br>
                 <p>
-                    {{this.rating}}
+                    General: 
+                    <ng-template #t let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                        </span>
+                      </ng-template>
+                      
+                      <ngb-rating [(rate)]="this.restaurant_info.general_ratings" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                </p>
+             
+                <p>
+                    Flavor: 
+                    <ng-template #t let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                        </span>
+                      </ng-template>
+                      
+                      <ngb-rating [(rate)]="this.restaurant_info.flavor_ratings" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                </p>
+               
+                <p>
+                    Environment: 
+                    <ng-template #t let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                        </span>
+                      </ng-template>
+                      
+                      <ngb-rating [(rate)]="this.restaurant_info.environment_ratings" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
+                </p>
+                
+                <p>
+                    Service: 
+                    <ng-template #t let-fill="fill">
+                        <span class="star" [class.full]="fill === 100">
+                          <span class="half" [style.width.%]="fill">&hearts;</span>&hearts;
+                        </span>
+                      </ng-template>
+                      
+                      <ngb-rating [(rate)]="this.restaurant_info.service_ratings" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                 </p>
                 <button mat-button color="accent" (click)="openRateDialog(this.restaurant_id, this.restaurant_name)">Rate {{this.restaurant_name}} Here</button>
 

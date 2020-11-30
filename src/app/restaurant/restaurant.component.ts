@@ -3,6 +3,10 @@ import { Router, ActivatedRoute } from '@angular/router';
 import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { RateDialogComponent} from '../rate-dialog/rate-dialog.component';
 import { TagRestaurantDialogComponent } from '../tag-restaurant-dialog/tag-restaurant-dialog.component'
+import { RestaurantService} from '../_services';
+import {Subject, from} from 'rxjs';
+import {debounceTime} from 'rxjs/operators';
+
 
 export interface Tag {
   name: string;
@@ -15,12 +19,19 @@ export interface Tag {
   styleUrls: ['./restaurant.component.scss']
 })
 export class RestaurantComponent implements OnInit {
+  restaurant_info = {
+    restaurant_id : "",
+    restaurant_name : "",
+    phone : "",
+    address :"123 St, Champaign, IL",
+    general_ratings : 4,
+    category : "boba",
+    flavorRating: 1,
+    environmentRating: 1,
+    serviceRating: 1
+  }
   restaurant_id : string;
-  restaurant_name : string;
-  phone = "217-123-1234";
-  address = "123 St, Champaign, IL";
-  rating = 4;
-  category = "boba";
+  restaurant_name: string;
   userID: number;
 
   restaurant_tags: Tag[] = [
@@ -30,7 +41,7 @@ export class RestaurantComponent implements OnInit {
     {name: 'Music Live!', freq: 3}
   ];
 
-  //ratings
+  //add ratings
   flavorRating: number;
   environmentRating: number;
   serviceRating: number;
@@ -38,9 +49,19 @@ export class RestaurantComponent implements OnInit {
   //new tag
   newTag: string;
 
+  // alert
+  private _searchFail = new Subject<string>();
+  private _success = new Subject<string>();
+  private _fail = new Subject<string>();
+  staticAlertClosed = false;
+  successMessage = '';
+  failMessage = '';
+  searchfailMessage = '';
+
   constructor(private route: ActivatedRoute,
     private router: Router,
-    public dialog: MatDialog) {
+    public dialog: MatDialog,
+    private restaurantService : RestaurantService) {
     this.getRestaurantData(); 
     let user = JSON.parse(localStorage.getItem('currentUser'));
     this.userID = user.customer_id;  
@@ -48,14 +69,46 @@ export class RestaurantComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this._success.subscribe(message => this.successMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.successMessage = '');
+    
+    this._fail.subscribe(message => this.failMessage = message);
+    this._fail.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.failMessage = '');
+
+    this._searchFail.subscribe(message => this.searchfailMessage = message);
+    this._searchFail.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.searchfailMessage = '');
+  }
+
+  public rateSuccessMessage() {
+    this._success.next(`Ratings submitted.`);
+  }
+  public rateFailMessage() {
+    this._fail.next(`Please fill in required fields and try again.`);
   }
 
   getRestaurantData() {
     this.restaurant_id = this.route.snapshot.paramMap.get("restaurant_id");
     this.restaurant_name = this.route.snapshot.paramMap.get("restaurant_name");
-    // todo: get restaurant data api
+    //  get restaurant data api
+    this.get_restaurant_profile(this.restaurant_id);
   }
 
+  get_restaurant_profile(restaurant_id) {
+    this.restaurantService.getRestaurantProfile(restaurant_id).pipe().subscribe(
+      data => {
+        this.restaurant_info = data;
+      },
+      error => {
+        this._searchFail.next(`Failed to fetch data. Please try again.`);
+      }
+    )
+  }
   openRateDialog(restaurant_id, restaurantName) {
     const rateDialogRef = this.dialog.open(RateDialogComponent, {
       data: { restaurant_name: restaurantName,
@@ -93,4 +146,6 @@ export class RestaurantComponent implements OnInit {
       }
     });
   }
+
+
 }

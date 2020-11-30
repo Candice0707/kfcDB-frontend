@@ -26,4 +26,10 @@ export class RestaurantService {
         console.log("try get restaurants");
         return this.http.post<Restaurant[]>(`${this.apiUrl}/search`, {searchkey});
     }
+
+    getRestaurantProfile(restaurant_id) {
+        console.log("try get restaurant profile");
+        const url = `${this.apiUrl}/get_restaurant/${restaurant_id}`;
+        return this.http.get<any>(url);
+    }
 }
