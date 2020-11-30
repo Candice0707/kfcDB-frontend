@@ -42,6 +42,9 @@ export class RestaurantComponent implements OnInit {
     {name: 'Music Live!', freq: 3}
   ];
 
+  //admin account
+  adminAccount = false;
+
   //add ratings
   flavorRating: number;
   environmentRating: number;
@@ -67,7 +70,9 @@ export class RestaurantComponent implements OnInit {
     this.get_retaurant_tags(this.restaurant_id, 10);
     let user = JSON.parse(localStorage.getItem('currentUser'));
     this.userID = user.customer_id;  
-
+    if(this.userID == 1) {
+      this.adminAccount = true;
+    }
   }
 
   ngOnInit(): void {
@@ -144,8 +149,11 @@ export class RestaurantComponent implements OnInit {
       // console.log(`Rate Dialog result: ${result}`);
       console.log(restaurant_id + ':'+ restaurantName);
       console.log("rate status : "+ result.status);
-      if(result.status =='true' ) {
-        
+      if(result.status =='true') {
+        if(!result.flavorRating || !result.environmentRating || !result.serviceRating) {
+          this._fail.next(`Update Failed. Please fill in required fields and try again.`);
+          return;
+        }
         this.flavorRating = result.flavorRating;
         this.environmentRating = result.environmentRating;
         this.serviceRating = result.serviceRating;
@@ -183,14 +191,14 @@ export class RestaurantComponent implements OnInit {
 
     tagDialogRef.afterClosed().subscribe(result => {
       console.log("tag status : "+ result.status);
-      if(result.status =='true' ) {
+      if(result.status =='true') {
         this.tagRestaurant(result.newTag);
       }
     });
   }
 
   tagRestaurant(tag) {
-    if(tag.length == 0) {
+    if(!tag || tag.length == 0) {
       this.tagFailMessage();
       return;
     }
@@ -204,6 +212,18 @@ export class RestaurantComponent implements OnInit {
             this._fail.next(`Update Failed. Please fill in required fields and try again.`);
           }
         );
+  }
+
+  // for admin account only
+  deleteRestaurant() {
+    this.restaurantService.deleteRestaurant(this.restaurant_id).pipe().subscribe(
+      data => {
+        this.router.navigate(['/home-component']);
+      },
+      error => {
+        this._fail.next(`Failed to delete restaurant. Please try again.`);
+      }
+    );
   }
 
 }

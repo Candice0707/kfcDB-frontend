@@ -9,6 +9,9 @@
       <div class="notification">
         <ngb-alert *ngIf="searchfailMessage" type="warning" (close)="searchfailMessage = ''">{{ searchfailMessage }}</ngb-alert>
       </div>
+      <div class="notification">
+        <ngb-alert *ngIf="rateSuccessMessage" type="success" (close)="rateSuccessMessage = ''">{{ rateSuccessMessage }}</ngb-alert>
+      </div>
      
       
         <mat-grid-list class="restaurant-list" cols="3" rowHeight="4:5">

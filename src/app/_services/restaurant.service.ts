@@ -47,4 +47,9 @@ export class RestaurantService {
         console.log("rate restaurant");
         return this.http.post<any>(`${this.apiUrl}/rate_restaurant`, {customer_id, restaurant_id, flav_rating, env_rating, serv_rating});
     }
+
+    deleteRestaurant(restaurant_id) {
+        console.log("try delete restaurant");
+        return this.http.post<any>(`${this.apiUrl}/delete_restaurant`, {restaurant_id});
+    }
 }

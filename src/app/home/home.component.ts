@@ -61,10 +61,12 @@ export class HomeComponent implements OnInit {
   private _success = new Subject<string>();
   private _fail = new Subject<string>();
   private _searchFail = new Subject<string>();
+  private _rateSuccess = new Subject<string>();
   staticAlertClosed = false;
   successMessage = '';
   failMessage = '';
   searchfailMessage = '';
+  rateSuccessMessage = '';
 
 
   add(event: MatChipInputEvent): void {
@@ -121,6 +123,10 @@ export class HomeComponent implements OnInit {
     this._searchFail.pipe(
       debounceTime(5000)
     ).subscribe(() => this.searchfailMessage = '');
+    this._rateSuccess.subscribe(message => this.rateSuccessMessage = message);
+    this._success.pipe(
+      debounceTime(5000)
+    ).subscribe(() => this.rateSuccessMessage = '');
   }
 
 
@@ -241,19 +247,37 @@ export class HomeComponent implements OnInit {
         flavorRating: this.flavorRating,
         environmentRating: this.environmentRating,
         serviceRating: this.serviceRating,
-        userID: this.userID
+        userID: this.userID,
+        status: 'false'
     }});
 
     rateDialogRef.afterClosed().subscribe(result => {
-      // console.log(`Rate Dialog result: ${result}`);
-      console.log(restaurant_id + ':'+ restaurantName);
-      console.log("service : "+ result.serviceRating);
-      if(result == "true") {
-        //this.rateRestaurant(restaurant_id, flavor, enviorment, service);
+      if(result.status =='true' ) {
+        
+        this.flavorRating = result.flavorRating;
+        this.environmentRating = result.environmentRating;
+        this.serviceRating = result.serviceRating;
+        this.rateRestaurant(restaurant_id);
       }
+      this.flavorRating = 0;
+      this.environmentRating = 0;
+      this.serviceRating = 0;
     });
   }
 
+  rateRestaurant(restaurant_id) {
+    console.log("flav: " + this.flavorRating);
+    this.restaurantService.rateRestaurant(this.userID, restaurant_id, this.flavorRating, 
+      this.environmentRating, this.serviceRating)
+        .pipe().subscribe(
+          data => {
+            this._rateSuccess.next(`Thank you for you feedbacks!`);
+          },
+          error => {
+            this._fail.next(`Update Failed. Please fill in required fields and try again.`);
+          }
+        );
+  }
 
 }
 

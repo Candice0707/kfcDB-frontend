@@ -5,6 +5,12 @@
             </span>
         <h2>{{this.restaurant_name}}</h2>
     </div>
+    <div class="notification">
+        <ngb-alert *ngIf="successMessage" type="success" (close)="successMessage = ''">{{ successMessage }}</ngb-alert>
+      </div>
+      <div class="notification">
+        <ngb-alert *ngIf="failMessage" type="warning" (close)="failMessage = ''">{{ failMessage }}</ngb-alert>
+      </div>
 
     <div class="content">
         <div class="info">
@@ -77,8 +83,8 @@
                       
                       <ngb-rating [(rate)]="this.restaurant_info.service_ratings" [starTemplate]="t" [readonly]="true" [max]="5"></ngb-rating>
                 </p>
-                <button mat-button color="accent" (click)="openRateDialog(this.restaurant_id, this.restaurant_name)">Rate {{this.restaurant_name}} Here</button>
-
+                <button mat-button color="accent" (click)="openRateDialog(this.restaurant_id, this.restaurant_name)">Rate</button>
+                <button mat-button *ngIf="adminAccount" (click)="deleteRestaurant()">Delete</button>
             </div>
         </div>
         <div class="charts">
