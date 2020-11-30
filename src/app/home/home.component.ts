@@ -102,6 +102,7 @@ export class HomeComponent implements OnInit {
     console.log("constructor: ", this.userID);
     this.get_profile();
     this.get_restaurant_list();
+    // this.get_tags();
     
   }
   
@@ -152,6 +153,16 @@ export class HomeComponent implements OnInit {
     );
   }
 
+  get_tags() {
+    this.userService.get_tags(this.userID).pipe(first()).subscribe(
+      data => {
+        this.tags = data;
+      },
+      error => {
+        this._fail.next(`Failed to fetch tags, please try again.`);
+      }
+    );
+  }
   update_profile() {
     if(this.lastName.length == 0 || this.firstName.length == 0) {
       this.changeFailMessage();

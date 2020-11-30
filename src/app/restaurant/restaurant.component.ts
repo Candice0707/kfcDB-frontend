@@ -63,6 +63,7 @@ export class RestaurantComponent implements OnInit {
     public dialog: MatDialog,
     private restaurantService : RestaurantService) {
     this.getRestaurantData(); 
+    this.get_retaurant_tags(this.restaurant_id, 10);
     let user = JSON.parse(localStorage.getItem('currentUser'));
     this.userID = user.customer_id;  
 
@@ -86,9 +87,16 @@ export class RestaurantComponent implements OnInit {
   }
 
   public rateSuccessMessage() {
-    this._success.next(`Ratings submitted.`);
+    this._success.next(`Thank you for you feedbacks!`);
   }
   public rateFailMessage() {
+    this._fail.next(`Please fill in required fields and try again.`);
+  }
+
+  public tagSuccessMessage() {
+    this._success.next(`New tag submitted. Thank you for you feedbacks!`);
+  }
+  public tagFailMessage() {
     this._fail.next(`Please fill in required fields and try again.`);
   }
 
@@ -109,6 +117,18 @@ export class RestaurantComponent implements OnInit {
       }
     )
   }
+
+  get_retaurant_tags(restaurant_id, length) {
+    this.restaurantService.getRestaurantTags(restaurant_id, length).pipe().subscribe(
+      data => {
+        this.restaurant_tags = data;
+      },
+      error => {
+        this._searchFail.next(`Failed to fetch restaurant tags. Please try again.`);
+      }
+    )
+  }
+
   openRateDialog(restaurant_id, restaurantName) {
     const rateDialogRef = this.dialog.open(RateDialogComponent, {
       data: { restaurant_name: restaurantName,
@@ -139,13 +159,29 @@ export class RestaurantComponent implements OnInit {
     tagDialogRef.afterClosed().subscribe(result => {
       // console.log(`Rate Dialog result: ${result}`);
       console.log(restaurant_id + ':'+ this.restaurant_name);
-      console.log("tag : "+ result.newTag);
+      // console.log("tag : "+ result.newTag);
       // this.newTag = result.newTag;
-      if(result == "true") {
-        //this.TagRestaurant(restaurant_id, flavor, enviorment, service);
+      if(result != "false") {
+        this.tagRestaurant(result.newTag);
       }
     });
   }
 
+  tagRestaurant(tag) {
+    if(tag.length == 0) {
+      this.tagFailMessage();
+      return;
+    }
+    this.restaurantService.tagRestaurant(this.userID, tag, this.restaurant_id)
+        .pipe().subscribe(
+          data => {
+            this.tagSuccessMessage();
+            this.get_retaurant_tags(this.restaurant_id, 10);
+          },
+          error => {
+            this._fail.next(`Update Failed. Please fill in required fields and try again.`);
+          }
+        );
+  }
 
 }

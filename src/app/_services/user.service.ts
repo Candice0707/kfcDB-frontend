@@ -38,4 +38,14 @@ export class UserService {
         console.log("customer_id: ", customer_id)
         return this.http.post<any>(`${this.apiUrl}/update_profile`, { customer_id, firstname,lastname });
     }
+
+    get_tags(customer_id) {
+        console.log("try get customer tags");
+        return this.http.post<any>(`${this.apiUrl}/get_customer_tags`, { customer_id });
+    }
+
+    update_tags(customer_id, tags){
+        console.log("try update customer tags");
+        return this.http.post<any>(`${this.apiUrl}/update_customer_tags`, { customer_id, tags});
+    }
 }

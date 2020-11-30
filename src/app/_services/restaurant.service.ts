@@ -32,4 +32,14 @@ export class RestaurantService {
         const url = `${this.apiUrl}/get_restaurant/${restaurant_id}`;
         return this.http.get<any>(url);
     }
+
+    getRestaurantTags(restaurant_id,length) {
+        console.log("try get restaurant popular " + length + " tags");
+        return this.http.post<any>(`${this.apiUrl}/get_restaurant_tags`, {restaurant_id, length});
+    }
+
+    tagRestaurant(customer_id, tag, restaurant_id) {
+        console.log("try get tag restaurant");
+        return this.http.post<any>(`${this.apiUrl}/tag_restaurant`, {customer_id, tag, restaurant_id});
+    }
 }
