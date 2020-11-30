@@ -29,6 +29,8 @@ import { TagCloudModule } from 'angular-tag-cloud-module';
 import {MatSelectModule} from '@angular/material/select';
 import { ChartDialogComponent } from './chart-dialog/chart-dialog.component';
 import { DxChartModule } from 'devextreme-angular';
+import {MatDividerModule} from '@angular/material/divider';
+
 
 
 
@@ -70,7 +72,8 @@ import { DxChartModule } from 'devextreme-angular';
     MatSliderModule,
     TagCloudModule,
     MatSelectModule,
-    DxChartModule
+    DxChartModule,
+    MatDividerModule
     // MatLabel
   ],
   providers: [],

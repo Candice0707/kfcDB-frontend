@@ -44,9 +44,11 @@ mat-label {
 .charts {
     flex: 3;
     padding-inline-end: 20px;
+    padding-left: 20px;
 }
 .tag-column {
     flex: 1;
+    padding-left: 20px;
 }
 
 
@@ -69,3 +71,4 @@ mat-chip-list {
     overflow: hidden;
     color: lightcoral;
   }
+
